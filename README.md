@@ -39,9 +39,13 @@ This repository houses the mathematical framework, operator definitions, and num
 
 ## Repository Directory & Simulation Suite
 
-Run the provided Python script to execute numerical diagonalizations and generate level-spacing statistics:
+Run the scripts in the `simulations/` directory to execute the complete numerical validation and level-spacing suite:
 
-* `sim_dilation_spectrum.py` — Builds the symmetrized arithmetic matrix $T_k^(Herm)$, computes exact eigenvalues across momentum modes, unfolds level spacings, and compares results against Poisson and GUE Wigner distributions.
+* `sim1_matrix_radius.py` — Computes the symmetrized arithmetic matrix $T_k^{\text{Herm}}$ and evaluates the exact spectral radii across primorial stages $k = 1$ to $5$.
+* `sim2_exact_spectrum.py` — Generates the hybrid continuous-discrete spectrum $\lambda_{m,a}(\epsilon_0)$ across coupled momentum and arithmetic modes.
+* `sim3_trace_formula.py` — Numerically verifies the dual trace formula and orbital return distributions via Poisson summation mappings.
+* `sim4_inductive_limit.py` — Evaluates interstage isometric embeddings $V_k = V_{\text{base}} \otimes V_{\text{fiber}}$ and tracks norm preservation across expanding base tori.
+* `sim5_level_spacings.py` — Unfolds nearest-neighbor level spacings and compares local statistics against Poisson and GUE Wigner distributions.
 
 ---
 
