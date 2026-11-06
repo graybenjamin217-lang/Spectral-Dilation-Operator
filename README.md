@@ -1,7 +1,7 @@
 # Spectral Theory of the Primorial-Modulated Dilation Operator on Continuous-Discrete Fiber Spaces
 
-[[https://zenodo.org/badge/DOI/10.5281/zenodo.23862749.svg]](https://doi.org/10.5281/zenodo.23862749)
-[[https://img.shields.io/badge/License-MIT-yellow.svg]](https://opensource.org/licenses/MIT)
+[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23862749.svg)](https://doi.org/10.5281/zenodo.23862749)
+[![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview & Scope
 
