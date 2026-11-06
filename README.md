@@ -70,3 +70,10 @@ If you utilize this operator framework or numerical simulation suite in your res
   doi     = {10.5281/zenodo.23862749},
   url     = {[https://doi.org/10.5281/zenodo.23862749](https://doi.org/10.5281/zenodo.23862749)}
 }
+
+```
+
+## Companion Insight & Perspective
+
+For those interested in a more grounded perspective in to the Abstract Concepts of this work please visit my Substack Repository for Insight:
+https://benjamin256464.substack.com/p/the-universal-whirlpool?r=99f2hz
