@@ -1,0 +1,170 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{fontspec}
+\usepackage[english, bidi=basic, provide=*]{babel}
+\babelprovide[import, onchar=ids fonts]{english}
+\babelfont{rm}{Noto Sans}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Spectral Theory of the Primorial-Modulated Dilation Operator on Continuous-Discrete Fiber Spaces}
+\author{Benjamin Edward Gray \\ Independent Researcher, Missouri, USA \\ Email: graybenjamin217@gmail.com}
+\date{}
+\maketitle
+
+\begin{abstract}
+We introduce a family of unbounded self-adjoint operators $D_k$ defined on hybrid continuous-discrete Hilbert spaces $\mathcal{H}_k = L^2(\mathbb{T}_{L_k}) \otimes \mathbb{C}^{N_k}$, where $\mathbb{T}_{L_k}$ is a continuous 1D torus of perimeter $L_k = \ln N_k$ and $N_k = p_k\# = \prod_{j=1}^k p_j$ is the $k$-th primorial. The operator $D_k$ couples a scale-invariant continuous dilation momentum operator $D_{0,k} = -i\frac{d}{dy}$ to a Hermitian arithmetic phase matrix $T_k^{\mathrm{Herm}}$ derived from divisor sums over prime factors of $N_k$. We establish the self-adjointness and compact resolvent structure of $D_k$, derive its exact finite-stage spectral decomposition and reflection-symmetry kernel via tensor-factor commutativity, obtain an explicit distributional trace formula via Poisson summation, and construct the inductive limit Hilbert space $\mathcal{H}_\infty = \lim_{\rightarrow}(\mathcal{H}_k, V_k)$. Finally, we provide a finite-stage numerical framework for evaluating the arithmetic spectrum and formulating desymmetrized spectral level-spacing conjectures in the primorial limit $k \rightarrow \infty$.
+\end{abstract}
+
+\noindent\textbf{Copyright:} \copyright\ 2026 Benjamin Edward Gray. Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+
+\section{Introduction}
+The search for operator-theoretic models that bridge continuous physical symmetries and discrete arithmetic structure remains a central theme in mathematical physics and non-commutative geometry [1]. While continuous scale-invariant operators such as $xp = -ix\frac{d}{dx}$ generate smooth dilation dynamics [2], discrete arithmetic operators---such as finite Fourier transforms and exponential sums over residue rings $\mathbb{Z}/N\mathbb{Z}$---encode distribution properties of prime numbers [7].
+
+In this paper, we construct a finite-stage hybrid operator $D_k$ that explicitly couples continuous scale invariance with discrete primorial arithmetic. Rather than treating continuous and discrete spaces separately, we construct a fiber bundle architecture where a continuous 1D torus $\mathbb{T}_{L_k}$ serves as the base manifold and a finite vector space $\mathbb{C}^{N_k}$ acts as an arithmetic fiber indexed by the primorial residue ring $\mathbb{Z}_{N_k}$ [8].
+
+\section{Mathematical Formulation}
+
+\subsection{The State Space \& Logarithmic Coordinate Bridge}
+For a given stage $k \in \mathbb{N}$, let $p_k$ denote the $k$-th prime number, and let $N_k = p_k\# = \prod_{j=1}^k p_j$ be the $k$-th primorial. We define the characteristic length parameter of the base torus strictly as $L_k = \ln N_k$. The Hilbert space at stage $k$ is defined as the tensor product:
+\[ \mathcal{H}_k = L^2(\mathbb{T}_{L_k}) \otimes \mathbb{C}^{N_k} \]
+
+\textbf{Logarithmic Coordinate Bridge:} To connect $D_{0,k} = -i\frac{d}{dy}$ to dilation dynamics on the positive multiplicative real interval $x \in [1, N_k]$, we introduce the logarithmic coordinate transformation $y = \ln x$ via the unitary map $U: L^2([1, N_k], dx) \rightarrow L^2([0, L_k], dy)$ defined by $(Uf)(y) = e^{y/2}f(e^y)$. Under $U$, weighted periodic boundary conditions $f(1) = N_k^{1/2}f(N_k)$ on $[1, N_k]$ map unitarily onto standard periodic boundary conditions $(Uf)(0) = (Uf)(L_k)$ on $H^1(\mathbb{T}_{L_k})$. Since $x\frac{d}{dx} = \frac{d}{dy}$, the symmetric scale-invariant dilation generator $-i(x\frac{d}{dx} + \frac{1}{2})$ transforms unitarily into the momentum operator $U[-i(x\frac{d}{dx} + \frac{1}{2})]U^{-1} = -i\frac{d}{dy}$ on the logarithmic variable $y \in [0, L_k]$ [2].
+
+\textbf{Domain Standardization:} Spatial coordinates $y$ on the torus are parameterized on the periodic interval $y \in [0, L_k]$, or equivalently on the symmetric interval $y \in [-\Lambda_k, \Lambda_k]$ where $\Lambda_k = L_k/2 = \frac{1}{2}\ln N_k$. The normalized continuous Fourier basis functions $\phi_m^{(k)}(y)$ for $m \in \mathbb{Z}$ take the explicit form:
+\[ \phi_m^{(k)}(y) = \frac{1}{\sqrt{L_k}} \exp\left(\frac{2\pi i m y}{L_k}\right), \quad y \in [0, L_k] \]
+
+\subsection{The Symmetrized Arithmetic Matrix}
+To ensure self-adjointness, the discrete arithmetic phase operator over $\mathbb{Z}_{N_k}$ must be strictly Hermitian. Let $T_k$ denote the raw complex-symmetric ($T_k^T = T_k$) phase matrix [7]:
+\[ [T_k]_{a,b} = \frac{1}{\sqrt{N_k}} \sum_{p|N_k} \frac{1}{\sqrt{p}} \exp\left(\frac{2\pi i a b p}{N_k}\right), \quad a,b \in \{0, \dots, N_k-1\} \]
+Because $T_k$ is complex-symmetric, its Hilbert-space adjoint $T_k^*$ coincides with its entrywise complex conjugate $\overline{T}_k$. Taking the Hermitian part $T_k^{\mathrm{Herm}} = \frac{1}{2}(T_k + T_k^*)$ yields a real symmetric matrix whose elements are cosine phase sums:
+\[ [T_k^{\mathrm{Herm}}]_{a,b} = \frac{1}{\sqrt{N_k}} \sum_{p|N_k} \frac{1}{\sqrt{p}} \cos\left(\frac{2\pi a b p}{N_k}\right), \quad a,b \in \{0, \dots, N_k-1\} \]
+
+\subsection{The Full Differential Operator}
+We define the primorial-modulated dilation operator $D_k$ acting on the dense domain $\mathrm{Dom}(D_k) = H^1(\mathbb{T}_{L_k}) \otimes \mathbb{C}^{N_k} \subset \mathcal{H}_k$ by:
+\[ D_k = D_{0,k} \otimes I_{\mathbb{C}^{N_k}} + \epsilon_0 I_{L^2} \otimes T_k^{\mathrm{Herm}} \]
+
+\subsection{Primorial Scale Parameters and Spectral Radii}
+\begin{table}[h]
+\centering
+\begin{tabular}{cccccc}
+\toprule
+Stage ($k$) & Prime ($p_k$) & Primorial ($N_k$) & Base Torus Length ($L_k$) & Spectral Radius ($\|T_k^{\mathrm{Herm}}\|_2$) & Matrix Rank \\
+\midrule
+1 & 2 & 2 & 0.6931 & 1.0000 & 1 \\
+2 & 3 & 6 & 1.7918 & 1.7703 & 3 \\
+3 & 5 & 30 & 3.4012 & 2.5052 & 12 \\
+4 & 7 & 210 & 5.3471 & 3.2055 & 82 \\
+5 & 11 & 2310 & 7.7450 & 3.8682 & 916 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Exact Spectral Decomposition}
+
+\subsection{Unperturbed Base Spectrum \& Diagonalization}
+The unperturbed operator $D_{0,k} \otimes I$ on $\mathbb{T}_{L_k}$ has discrete momentum eigenvalues $\mu_m^{(0)} = 2\pi m / \ln N_k$ for $m \in \mathbb{Z}$. Because $D_{0,k} \otimes I$ and $I \otimes T_k^{\mathrm{Herm}}$ act on separate tensor factors of $\mathcal{H}_k$, they strongly commute:
+\[ [D_{0,k} \otimes I, I \otimes T_k^{\mathrm{Herm}}] = 0 \]
+Consequently, $D_k$ is simultaneously diagonalized on the orthonormal product basis $\psi_{m,a}(y) = \phi_m^{(k)}(y) \otimes v_a$, where $\{v_a\}_{a=1}^{N_k}$ are the orthonormal eigenvectors of $T_k^{\mathrm{Herm}}$ satisfying $T_k^{\mathrm{Herm}} v_a = \mu_a(T_k^{\mathrm{Herm}}) v_a$:
+\[ \lambda_{m,a}(\epsilon_0) = \frac{2\pi m}{\ln N_k} + \epsilon_0 \mu_a(T_k^{\mathrm{Herm}}), \quad m \in \mathbb{Z}, \quad a \in \{1, \dots, N_k\} \]
+
+\textbf{Symmetry Structure and Partial Degeneracy Lifting:} Because $\cos(2\pi(N_k - a)bp/N_k) = \cos(2\pi abp/N_k)$, the matrix $T_k^{\mathrm{Herm}}$ is invariant under residue inversion $a \mapsto N_k - a \pmod{N_k}$. Any antisymmetric fiber vector satisfying $v_{N_k-a} = -v_a$ lies in $\ker(T_k^{\mathrm{Herm}})$, guaranteeing at least $\lfloor(N_k - 1)/2\rfloor$ identically zero eigenvalues (and a total kernel dimension of $N_k - \operatorname{rank}(T_k^{\mathrm{Herm}})$, e.g., 128 zero modes at $k=4$). Thus, the non-zero arithmetic eigenvalues $\mu_a(T_k^{\mathrm{Herm}})$ act as uniform spectral shifts that partially lift the $N_k$-fold degeneracy at each base momentum lattice point $2\pi m / \ln N_k$.
+
+\section{Resolvent Properties and Self-Adjointness}
+
+\noindent\textbf{Theorem 4.1 (Self-Adjointness and Point Spectrum)}\\
+\textit{The operator $D_k$ is densely defined and self-adjoint on $\mathrm{Dom}(D_k) = H^1(\mathbb{T}_{L_k}) \otimes \mathbb{C}^{N_k} \subset \mathcal{H}_k$. Its spectrum $\sigma(D_k)$ is purely point-discrete with no continuous spectrum.}
+
+\noindent\textit{Proof:} The operator $D_{0,k} = -i\frac{d}{dy}$ with periodic boundary conditions is self-adjoint on $H^1(\mathbb{T}_{L_k}) \subset L^2(\mathbb{T}_{L_k})$. The finite-dimensional matrix $T_k^{\mathrm{Herm}}$ is real symmetric and bounded on $\mathbb{C}^{N_k}$. By the Kato-Rellich theorem [3], the sum of the self-adjoint operator $D_{0,k} \otimes I$ and the bounded self-adjoint perturbation $\epsilon_0 I \otimes T_k^{\mathrm{Herm}}$ is self-adjoint on $\mathrm{Dom}(D_{0,k} \otimes I) = H^1(\mathbb{T}_{L_k}) \otimes \mathbb{C}^{N_k}$. Since $D_{0,k}$ has a compact resolvent on the 1D torus and $\mathbb{C}^{N_k}$ is finite-dimensional, $D_k$ has a compact resolvent and therefore a purely discrete point spectrum.
+
+\vspace{0.5cm}
+\noindent\textbf{Theorem 4.2 (Compact Resolvent \& Hilbert-Schmidt Class)}\\
+\textit{For any $z \in \mathbb{C} \setminus \mathbb{R}$, the resolvent operator $R_z(D_k) = (D_k - zI)^{-1}$ is compact and belongs to the Hilbert-Schmidt class $\mathcal{S}_2(\mathcal{H}_k)$.}
+
+\noindent\textit{Proof:} In the orthonormal eigenbasis $\{\psi_{m,a}\}$, the eigenvalues of $R_z(D_k)$ are $(\lambda_{m,a}(\epsilon_0) - z)^{-1}$. Computing the squared Hilbert-Schmidt norm yields:
+\[ \|R_z(D_k)\|_{\mathrm{HS}}^2 = \sum_{a=1}^{N_k} \sum_{m=-\infty}^\infty \left| \frac{2\pi m}{\ln N_k} + \epsilon_0 \mu_a(T_k^{\mathrm{Herm}}) - z \right|^{-2} < \infty \]
+For $z = u + iv$ with $v = \mathrm{Im}(z) \neq 0$, each term is bounded above by $v^{-2}$, and for fixed $a$ the real shift $c_a = \epsilon_0 \mu_a(T_k^{\mathrm{Herm}}) - u$ is finite, so $|(2\pi m / \ln N_k) + c_a - iv|^{-2} = \mathcal{O}(m^{-2})$ as $|m| \rightarrow \infty$. Since $N_k$ is finite at every stage $k$, the outer sum is a finite sum of convergent $p$-series ($p=2$), establishing that $R_z(D_k) \in \mathcal{S}_2(\mathcal{H}_k)$ and is therefore compact [3].
+
+\section{Explicit Trace Formula and Spectral Distribution Limits}
+
+\subsection{Operational Trace and Dual Poisson Formula}
+In the sense of tempered distributions $\mathcal{S}'(\mathbb{R})$ (i.e., when integrated against a Schwartz test function $f \in \mathcal{S}(\mathbb{R})$ to form the trace-class operator $\int_{\mathbb{R}} f(t) e^{-itD_k} dt$), the distributional trace of the unitary evolution group $e^{-itD_k}$ acting on $\mathcal{H}_k$ factors into the continuous base momentum sum and the finite arithmetic matrix trace:
+\[ \mathrm{Tr}(e^{-itD_k}) = \mathrm{Tr}_{\mathbb{C}^{N_k}}(e^{-it\epsilon_0 T_k^{\mathrm{Herm}}}) \sum_{m=-\infty}^\infty \exp\left(-it\frac{2\pi m}{\ln N_k}\right) \]
+Applying the distributional Poisson summation formula $\sum_{m\in\mathbb{Z}} e^{-2\pi i m (t/L_k)} = L_k \sum_{n\in\mathbb{Z}} \delta(t - nL_k)$ [6] to the momentum lattice converts the sum into periodic orbital return times $t = n \ln N_k$ on the base torus $\mathbb{T}_{L_k}$:
+\[ \mathrm{Tr}(e^{-itD_k}) = \ln N_k \cdot \mathrm{Tr}_{\mathbb{C}^{N_k}}(e^{-it\epsilon_0 T_k^{\mathrm{Herm}}}) \sum_{n=-\infty}^\infty \delta(t - n \ln N_k) \]
+Expanding $\mathrm{Tr}_{\mathbb{C}^{N_k}}(e^{-it\epsilon_0 T_k^{\mathrm{Herm}}})$ as a power series in $\epsilon_0$ isolates the moments of the prime divisor cosine sums at each return time $t = n \ln N_k$:
+\[ \mathrm{Tr}_{\mathbb{C}^{N_k}}(e^{-it\epsilon_0 T_k^{\mathrm{Herm}}}) = N_k - it\epsilon_0 \mathrm{Tr}(T_k^{\mathrm{Herm}}) - \frac{t^2 \epsilon_0^2}{2} \mathrm{Tr}((T_k^{\mathrm{Herm}})^2) + \mathcal{O}(\epsilon_0^3) \]
+
+\section{Inductive Limit Hilbert Space $\mathcal{H}_\infty$}
+To evaluate the primorial limit $k \rightarrow \infty$ at the state-space level, we construct an inductive system $(\mathcal{H}_k, V_k)$ linked by isometric embeddings $V_k: \mathcal{H}_k \hookrightarrow \mathcal{H}_{k+1}$ where $V_k = V_{\mathrm{base}} \otimes V_{\mathrm{fiber}}$.
+
+\begin{enumerate}
+    \item \textbf{Fiber Injection ($V_{\mathrm{fiber}}$):} Identifying $\mathbb{C}^{N_{k+1}} \cong \mathbb{C}^{N_k} \otimes \mathbb{C}^{p_{k+1}}$, the finite fiber space embeds isometrically into the next prime channel via the normalized uniform vector $u_{p_{k+1}} = \frac{1}{\sqrt{p_{k+1}}}(1, 1, \dots, 1)^T \in \mathbb{C}^{p_{k+1}}$:
+    \[ V_{\mathrm{fiber}}: \mathbb{C}^{N_k} \hookrightarrow \mathbb{C}^{N_{k+1}}, \quad v \mapsto v \otimes u_{p_{k+1}} \]
+    
+    \item \textbf{Base Torus Dilation ($V_{\mathrm{base}}$):} As the torus perimeter expands via $L_{k+1} = \ln N_{k+1} = L_k + \ln p_{k+1}$, the unitary dilation map $(V_{\mathrm{base}}f)(y) = \sqrt{L_k/L_{k+1}} f\left(\frac{L_k}{L_{k+1}}y\right)$ maps each Fourier mode norm-preservingly onto the next stage:
+    \[ (V_{\mathrm{base}}\phi_m^{(k)})(y) = \phi_m^{(k+1)}(y) = \frac{1}{\sqrt{L_{k+1}}} \exp\left(\frac{2\pi i m y}{L_{k+1}}\right) \]
+\end{enumerate}
+
+This ensures $\|V_{\mathrm{base}}\phi_m^{(k)}\|_{L^2(\mathbb{T}_{L_{k+1}})} = 1$ and preserves all inner products ($\langle V_k\Psi, V_k\Phi\rangle_{\mathcal{H}_{k+1}} = \langle \Psi, \Phi \rangle_{\mathcal{H}_k}$). Consequently, the direct limit Hilbert space $\mathcal{H}_\infty = \lim_{\rightarrow}(\mathcal{H}_k, V_k)$ is rigorously defined as the Hilbert completion of $\bigcup_{k=1}^\infty \mathcal{H}_k / \sim$ under the canonical inductive inner product [8].
+
+\textbf{Remark on Operator Compatibility in the Inductive Limit:} Under $V_{\mathrm{base}}$, the unperturbed momentum generator satisfies the logarithmic rescaling relation $V_{\mathrm{base}} D_{0,k} V_{\mathrm{base}}^* = (L_{k+1}/L_k) D_{0,k+1}$ rather than strict isometric intertwining, while the arithmetic perturbations $T_k^{\mathrm{Herm}}$ introduce new prime phase channels at each stage. Thus, while the state-space inductive limit $\mathcal{H}_\infty$ is unconditionally established, constructing a renormalized limiting operator $D_\infty$ on a dense domain in $\mathcal{H}_\infty$ remains an open problem for future work.
+
+\section{Non-Commutative Geometry \& Numerical Simulation}
+At each finite stage $k$, the triple $(\mathcal{A}_k, \mathcal{H}_k, D_k)$ forms a spectral triple [1] over the involutive algebra $\mathcal{A}_k = C^\infty(\mathbb{T}_{L_k}) \otimes M_{N_k}(\mathbb{C})$ acting faithfully on $\mathcal{H}_k$ via pointwise multiplication on $L^2(\mathbb{T}_{L_k})$ and matrix multiplication on $\mathbb{C}^{N_k}$. For any smooth matrix-valued function $g \otimes M \in \mathcal{A}_k$, the commutator:
+\[ [D_k, g \otimes M] = -ig'(y) \otimes M + \epsilon_0 g(y) \otimes [T_k^{\mathrm{Herm}}, M] \]
+extends to a bounded operator on $\mathcal{H}_k$, while $(D_k - zI)^{-1} \in \mathcal{S}_2(\mathcal{H}_k)$ is compact by Theorem 4.2.
+
+\begin{verbatim}
+import numpy as np
+
+def primorial(k):
+    primes = [2, 3, 5, 7, 11, 13, 17, 19, 23]
+    return int(np.prod(primes[:k])), primes[:k]
+
+def build_T_herm(k):
+    Nk, primes = primorial(k)
+    T = np.zeros((Nk, Nk), dtype=np.float64)
+    a_idx, b_idx = np.arange(Nk), np.arange(Nk)
+    A, B = np.meshgrid(a_idx, b_idx)
+    for p in primes:
+        T += (1.0 / np.sqrt(p)) * np.cos((2 * np.pi * A * B * p) / Nk)
+    return T / np.sqrt(Nk), Nk
+
+def stage_diagnostics(k, tol=1e-10):
+    T_herm, Nk = build_T_herm(k)
+    mu = np.linalg.eigvalsh(T_herm)
+    spectral_radius = float(np.max(np.abs(mu)))
+    numerical_rank = int(np.sum(np.abs(mu) > tol))
+    return Nk, float(np.log(Nk)), spectral_radius, numerical_rank
+
+def compute_spectrum(k, m_max=50, epsilon0=0.35, desymmetrize=False, tol=1e-16):
+    T_herm, Nk = build_T_herm(k)
+    mu = np.linalg.eigvalsh(T_herm)
+    if desymmetrize:
+        mu = mu[np.abs(mu) > tol]
+    L_k = np.log(Nk)
+    m_vals = np.arange(-m_max, m_max + 1)
+    lambda_ma = (2 * np.pi * m_vals[:, None] / L_k) + epsilon0 * mu[None, :]
+    return np.sort(lambda_ma.flatten())
+\end{verbatim}
+
+\noindent\textbf{The Primorial Limit Conjecture (Conjecture 7.1):} After quotienting out the reflection-symmetry kernel $\ker(T_k^{\mathrm{Herm}})$ and discrete multiplicative degeneracies of $\mathbb{Z}_{N_k}$, we conjecture that the unfolded local level-spacing distribution of the active arithmetic spectrum of $D_k$ transitions as $k \rightarrow \infty$ from rigid Poisson lattice statistics toward Wigner-Dyson random matrix statistics [4]---specifically the Gaussian Orthogonal Ensemble (GOE) for the time-reversal-invariant real symmetric operator $T_k^{\mathrm{Herm}}$, and the Gaussian Unitary Ensemble (GUE) in generalized models where time-reversal invariance is broken via complex Hermitian phase modulation and non-commuting spatial coupling $\epsilon_0(y)$ [5].
+
+\section{References}
+\begin{enumerate}
+    \item[1] Connes, A. (1994). \textit{Noncommutative Geometry}. Academic Press, San Diego, CA.
+    \item[2] Berry, M. V., \& Keating, J. P. (1999). $H=xp$ and the Riemann zeros. In \textit{Supersymmetry and Trace Formulae} (pp. 355-367). Springer.
+    \item[3] Reed, M., \& Simon, B. (1980). \textit{Methods of Modern Mathematical Physics. Vol. I: Functional Analysis}. Academic Press.
+    \item[4] Mehta, M. L. (2004). \textit{Random Matrices} (3rd ed.). Elsevier / Academic Press.
+    \item[5] Katok, A., \& Hasselblatt, B. (1995). \textit{Introduction to the Modern Theory of Dynamical Systems}. Cambridge University Press.
+    \item[6] Guillemin, V., \& Sternberg, S. (1977). \textit{Geometric Asymptotics}. American Mathematical Society.
+    \item[7] Apostol, T. M. (1976). \textit{Introduction to Analytic Number Theory}. Springer-Verlag.
+    \item[8] Gray, B. E. (2026). The Universal Variable-Exponent Feedback Operator. Zenodo. [doi:10.5281/zenodo.23137306].
+\end{enumerate}
+
+\end{document}
